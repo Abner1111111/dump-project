@@ -10,7 +10,6 @@ os.environ["SDL_VIDEO_WINDOW_POS"] = "0,0"
 pygame.init()
 pygame.font.init()
 
-
 SPEED_MULTIPLIER = 1.0
 BASE_FLOAT_SPEED = 1.5
 
@@ -36,7 +35,6 @@ LINE_DELAYS_SECONDS = [
 
 TYPE_SPEEDS_MS = [40, 60, 40, 40, 90]
 DEFAULT_TYPE_SPEED_MS = 80
-
 CARD_WIDTH = 420
 CARD_HEIGHT = 260
 CARD_ROUNDING = 20
@@ -44,18 +42,12 @@ CARD_BORDER_WIDTH = 3
 ACCENT_INSET = 10
 ACCENT_BORDER_WIDTH = 1
 SHADOW_OFFSET = (7, 9)
-
 FONT_STACK = ["Georgia", "Baskerville Old Face", "Palatino Linotype", "Helvetica"]
 BODY_FONT_SIZE = 44
-
 POP_IN_MS = 260
 SWAY_AMPLITUDE = 7.0
 SWAY_SPEED = 1.1
-
 TRANSPARENT_KEY = (255, 0, 128)
-
-# How slowly the card background/text drift between black and white.
-# Lower = slower.
 BW_CYCLE_SPEED = 0.15
 
 
@@ -92,9 +84,6 @@ class FloatingCard:
         self.screen_w = screen_w
         self.screen_h = screen_h
 
-        # Background and text now slowly drift between black and white
-        # over time instead of being fixed per-card. Each card gets its
-        # own phase offset so they don't all flip in perfect unison.
         self.color_phase = random.uniform(0, math.tau)
         self.accent_color = (232, 178, 92)
         self.shadow_color = (0, 0, 0)
@@ -307,20 +296,20 @@ class BinaryDinoCard(FloatingCard):
         self.font_pixel = pygame.font.SysFont("Courier", 10, bold=True)
 
         self.chars_0 = {
-            "green": self.font_pixel.render("0", True, (255, 105, 180)),   # Hot Pink petals
-            "dark": self.font_pixel.render("0", True, (34, 139, 34)),      # Forest Green stem
-            "eye": self.font_pixel.render("0", True, (255, 215, 0)),       # Gold center
+            "green": self.font_pixel.render("0", True, (255, 105, 180)),  
+            "dark": self.font_pixel.render("0", True, (34, 139, 34)),      
+            "eye": self.font_pixel.render("0", True, (255, 215, 0)),       
             "white": self.font_pixel.render("0", True, (255, 255, 255)),
         }
 
         self.chars_1 = {
-            "green": self.font_pixel.render("1", True, (255, 182, 193)),   # Light Pink petals
-            "dark": self.font_pixel.render("1", True, (50, 205, 50)),      # Lime Green stem
-            "eye": self.font_pixel.render("1", True, (255, 255, 102)),     # Bright Yellow center
+            "green": self.font_pixel.render("1", True, (255, 182, 193)),  
+            "dark": self.font_pixel.render("1", True, (50, 205, 50)),      
+            "eye": self.font_pixel.render("1", True, (255, 255, 102)),    
             "white": self.font_pixel.render("1", True, (255, 255, 255)),
         }
 
-        self.DINO_HEAD = [
+        self.FLOWER_HEAD = [
             "..........XXX...........",
             "..........XXX...........",
             "........XXXXXXX.........",
@@ -334,7 +323,7 @@ class BinaryDinoCard(FloatingCard):
             "..........XXX...........",
         ]
 
-        self.DINO_BODY = [
+        self.FLOWER_BODY = [
             "...........XX...........",
             "...........XX...........",
             "...........XX...........",
@@ -389,7 +378,7 @@ class BinaryDinoCard(FloatingCard):
 
         bin_shift = current_time // 70
 
-        for r, row in enumerate(self.DINO_HEAD):
+        for r, row in enumerate(self.FLOWER_HEAD):
             for c, char in enumerate(row):
                 if char == ".":
                     continue
@@ -412,9 +401,9 @@ class BinaryDinoCard(FloatingCard):
                 ):
                     surface.blit(font_surf, (pos_x, pos_y))
 
-        head_height_offset = len(self.DINO_HEAD) * cell_size
+        head_height_offset = len(self.FLOWER_HEAD) * cell_size
 
-        for r, row in enumerate(self.DINO_BODY):
+        for r, row in enumerate(self.FLOWER_BODY):
             for c, char in enumerate(row):
                 if char == ".":
                     continue
